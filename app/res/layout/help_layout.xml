@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="#ff434343" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/navigation_bar" android:layout_width="fill_parent" android:layout_height="50.0dip">
+        <ImageView android:id="@id/back" android:focusable="true" android:clickable="true" android:layout_width="40.0dip" android:layout_height="40.0dip" android:layout_margin="5.0dip" android:src="@drawable/back_no_bg" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true" android:layout_alignParentStart="true" />
+        <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+            <TextView android:textSize="16.0sp" android:textStyle="bold" android:textColor="#ffffffff" android:layout_gravity="center_horizontal" android:id="@id/instruction_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/intruction_ch" />
+            <TextView android:textStyle="bold" android:textColor="#ffffffff" android:layout_gravity="center_horizontal" android:id="@id/media_title_en" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/instruction_en" />
+        </LinearLayout>
+    </RelativeLayout>
+    <View android:background="#ffe8e8e8" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <android.support.v4.view.ViewPager android:id="@id/instructions" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true">
+            <ImageView android:id="@id/dot1" android:layout_width="10.0dip" android:layout_height="10.0dip" android:src="@drawable/dot_blue" />
+            <ImageView android:id="@id/dot2" android:layout_width="10.0dip" android:layout_height="10.0dip" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:src="@drawable/dot_white" />
+            <ImageView android:id="@id/dot3" android:layout_width="10.0dip" android:layout_height="10.0dip" android:src="@drawable/dot_white" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

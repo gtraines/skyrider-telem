@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@drawable/main_background" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:paddingTop="10.0dip" android:layout_width="fill_parent" android:layout_height="180.0dip" android:src="@drawable/home_play" android:scaleType="centerCrop" android:layout_alignParentBottom="true" />
+    <ImageView android:id="@id/power" android:layout_width="120.0dip" android:layout_height="120.0dip" android:layout_marginBottom="60.0dip" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" />
+    <TextView android:textColor="@android:color/white" android:id="@id/tv_version" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="10.0dip" android:layout_alignParentBottom="true" android:layout_alignParentEnd="true" />
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:layout_marginBottom="30.0dip" android:layout_alignParentBottom="true">
+        <ImageView android:id="@id/settings" android:layout_width="40.0dip" android:layout_height="40.0dip" android:layout_marginRight="15.0dip" android:src="@drawable/setting_btn" />
+        <ImageView android:id="@id/help" android:visibility="gone" android:layout_width="40.0dip" android:layout_height="40.0dip" android:src="@drawable/help_btn" />
+    </LinearLayout>
+</RelativeLayout>

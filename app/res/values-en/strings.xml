@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sky Rider Control</string>
+    <string name="autosave_arg_ch">Auto save params</string>
+    <string name="cancel">Cancel</string>
+    <string name="cancel_ch">Cancel</string>
+    <string name="confirm">Delete</string>
+    <string name="connecting_camera">Connecting...</string>
+    <string name="control_protocol_ch">Control protocol</string>
+    <string name="current_protocol_ch">Current Protocol</string>
+    <string name="delete_ch">Delete</string>
+    <string name="edit_ch">Edit</string>
+    <string name="flight_arg_ch">Flight Params</string>
+    <string name="fpv_info">FPV Info</string>
+    <string name="hint_back">back</string>
+    <string name="hint_delete_files">Are you sure you want to delete all the selected files?</string>
+    <string name="hint_fpv_notconnected">Please connect to the drone</string>
+    <string name="hint_photo_saved">Photo saved!</string>
+    <string name="hint_video_saved">Video saved!</string>
+    <string name="instruction_en">Instruction</string>
+    <string name="intruction_ch">Instructions</string>
+    <string name="inverse_ch">Inverse</string>
+    <string name="media_ch">Media</string>
+    <string name="pictures_ch">PHOTO</string>
+    <string name="reset_arg_ch">Reset params</string>
+    <string name="reset_success">Reset Success</string>
+    <string name="right_hand_mode_ch">Right-handed Mode</string>
+    <string name="select_all_ch">All</string>
+    <string name="ui_setting_ch">Interface Params</string>
+    <string name="version_ch">"Ver "</string>
+    <string name="videos_ch">VIDEO</string>
+</resources>
