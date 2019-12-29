@@ -1,8 +1,9 @@
 import pygame
 from pygame import locals as pyg_const
 from pygame import event
+from updatable.updatableabc import UpdatableAbc
 
-class InputController:
+class InputController(UpdatableAbc):
     
     KEYDOWN_HANDLERS = { }
     
@@ -19,7 +20,10 @@ class InputController:
         if keyup_override_handlers:
             for keyup_key in keyup_override_handlers.keys():
                 self._keyup_handlers[keyup_key] = keyup_override_handlers[keyup_key]
-                 
+    
+    def update(self, context):
+        self.process_input_events(context)
+          
     def process_input_events(self, context):
         """
         The pygame.eventpygame module for interacting with events and queues queue gets pygame.KEYDOWN and pygame.KEYUP events when the keyboard buttons are pressed and released. Both events have key and mod attributes.
@@ -40,10 +44,10 @@ scancode: the platform-specific key code, which could be different from keyboard
             context.done = True
         # User pressed down on a key
         elif evt.type == pyg_const.KEYDOWN:
-            self._process_key_down(evt.key, context)
+            self._process_key_down(evt, context)
         # User let up on a key
         elif evt.type == pyg_const.KEYUP:
-            self._process_key_up(evt.key, context)
+            self._process_key_up(evt, context)
     
     def _process_key_down(self, evt, context):
         # Figure out if it was an arrow key. If so
@@ -62,6 +66,10 @@ scancode: the platform-specific key code, which could be different from keyboard
         if can_handle:
             handle_func = self._keydown_handlers[evt.key]
             handle_func(context)
+        else:
+            input_message = f'Received key_down event: {str(evt.key)} without handler'
+            print(input_message)
+            context.input_message = input_message 
         
     def _process_key_up(self, evt, context):
         # If it is an arrow key, reset vector back to zero
@@ -76,3 +84,15 @@ scancode: the platform-specific key code, which could be different from keyboard
         if can_handle:
             handle_func = self._keyup_handlers[evt.key]
             handle_func(context)
+        else:
+            input_message = f'Received keyup event: {str(evt.key)} without handler'
+            print(input_message)
+            context.input_message = input_message
+
+
+if __name__ == "__main__":
+    pygame.init()
+    cntrlr = InputController()
+    ctxt = TestGameContext()
+    while not ctxt.done:
+        cntrlr.process_input_events(ctxt)
