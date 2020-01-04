@@ -1,7 +1,7 @@
 import pygame
-from ui.utils.interpolator import Interpolator
+from ..utils.interpolator import Interpolator
 
-class LcarsWidget(pygame.sprite.DirtySprite):
+class ElementBase(pygame.sprite.DirtySprite):
     """Base class for all widgets"""
 
     def __init__(self, color, pos, size, handler=None):
@@ -76,11 +76,12 @@ class LcarsWidget(pygame.sprite.DirtySprite):
                 if (pixel > 50):
                     self.image.set_at((x, y), colour)
 
-class LcarsMoveToMouse(LcarsWidget):
+
+class LcarsMoveToMouse(ElementBase):
     """For testing purposes - move a small square to last clicked position"""
     def __init__(self, color):
         self.image = None
-        LcarsWidget.__init__(self, color, (0,0), (10,10))
+        ElementBase.__init__(self, color, (0,0), (10,10))
         self.focussed = True
 
     def handleEvent(self, event, clock):

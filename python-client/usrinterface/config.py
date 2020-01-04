@@ -1,5 +1,4 @@
-
-            
+       
 class UiConfig:
     def __init__(self, 
                  ui_dimensions, 

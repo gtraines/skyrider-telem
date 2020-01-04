@@ -1,7 +1,7 @@
-from ui.widgets.sprite import LcarsWidget
+from .elementbase import ElementBase
 import pygame
 
-class LcarsBackground(LcarsWidget):
+class LcarsBackground(ElementBase):
     def update(self, screen):
         screen.blit(self.image, self.rect)
         self.dirty = False        
@@ -9,10 +9,10 @@ class LcarsBackground(LcarsWidget):
     def handleEvent(self, event, clock):
         pass
     
-class LcarsBackgroundImage(LcarsWidget):
+class LcarsBackgroundImage(ElementBase):
     def __init__(self, image):
         self.image = pygame.image.load(image).convert()
-        LcarsWidget.__init__(self, None, (0,0), None)
+        ElementBase.__init__(self, None, (0,0), None)
     
     def update(self, screen):
         screen.blit(self.image, self.rect)
@@ -21,7 +21,7 @@ class LcarsBackgroundImage(LcarsWidget):
     def handleEvent(self, event, clock):
         pass
     
-class LcarsImage(LcarsWidget):
+class LcarsImage(ElementBase):
     def __init__(self, image, pos):
         self.image = pygame.image.load(image).convert()
-        LcarsWidget.__init__(self, None, pos, None)
+        ElementBase.__init__(self, None, pos, None)
