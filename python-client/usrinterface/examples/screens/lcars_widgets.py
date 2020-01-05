@@ -2,9 +2,9 @@ import pygame
 from pygame.font import Font
 from pygame.locals import *
 
-from ...usrinterface.utils.sound import Sound
-from ...usrinterface.uielements.elementbase import ElementBase
-from ...usrinterface.uiconstants import ColorsRgb
+from ...utils.sound import Sound
+from ...uielements.elementbase import ElementBase
+from ...uiconstants import ColorsRgb
 
 class LcarsElbow(ElementBase):
     """The LCARS corner elbow - not currently used"""
@@ -14,7 +14,7 @@ class LcarsElbow(ElementBase):
     STYLE_BOTTOM_RIGHT = 2
     STYLE_TOP_RIGHT = 3
     
-    def __init__(self, colour, style, pos, handler=None):
+    def __init__(self, colour, style, pos, ui_config, handler=None):
         image = pygame.image.load("assets/elbow.png").convert_alpha()
         # alpha=255
         # image.fill((255, 255, 255, alpha), None, pygame.BLEND_RGBA_MULT)
@@ -27,7 +27,7 @@ class LcarsElbow(ElementBase):
         
         self.image = image
         size = (image.get_rect().width, image.get_rect().height)
-        ElementBase.__init__(self, colour, pos, size, handler)
+        ElementBase.__init__(self, colour, pos, size, ui_config, handler)
         self.applyColour(colour)
 
 class LcarsTab(ElementBase):
@@ -36,20 +36,20 @@ class LcarsTab(ElementBase):
     STYLE_LEFT = 1
     STYLE_RIGHT = 2
     
-    def __init__(self, colour, style, pos, handler=None):
+    def __init__(self, colour, style, pos, ui_config, handler=None):
         image = pygame.image.load("assets/tab.png").convert()
         if (style == LcarsTab.STYLE_RIGHT):
             image = pygame.transform.flip(image, False, True)
         
         size = (image.get_rect().width, image.get_rect().height)
-        ElementBase.__init__(self, colour, pos, size, handler)
+        ElementBase.__init__(self, colour, pos, size, ui_config, handler)
         self.image = image
         self.applyColour(colour)
 
 class LcarsButton(ElementBase):
     """Button - either rounded or rectangular if rectSize is spcified"""
 
-    def __init__(self, colour, pos, text, handler=None, rectSize=None):
+    def __init__(self, colour, pos, text, ui_config, handler=None, rectSize=None):
         if rectSize == None:
             image = pygame.image.load("assets/button.png").convert_alpha()
             size = (image.get_rect().width, image.get_rect().height)
@@ -66,13 +66,17 @@ class LcarsButton(ElementBase):
                 (image.get_rect().width - textImage.get_rect().width - 10,
                     image.get_rect().height - textImage.get_rect().height - 5))
     
-        ElementBase.__init__(self, colour, pos, size, handler)
+        ElementBase.__init__(self, colour, pos, size, ui_config, handler)
         self.applyColour(colour)
         self.highlighted = False
-        self.beep = Sound("assets/audio/panel/202.wav")
+        
+        self.beep = Sound("assets/audio/panel/202.wav", self._ui_config)
 
     def handleEvent(self, event, clock):
-        if (event.type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos) and self.visible == True):
+        if (event.type == pygame.MOUSEBUTTONDOWN and 
+            self.rect.collidepoint(event.pos) and 
+            self.visible == True):
+            
             self.applyColour(ColorsRgb.WHITE)
             self.highlighted = True
             self.beep.play()
@@ -85,7 +89,7 @@ class LcarsButton(ElementBase):
 class LcarsText(ElementBase):
     """Text that can be placed anywhere"""
 
-    def __init__(self, colour, pos, message, size=1.0, background=None, handler=None):
+    def __init__(self, colour, pos, message, ui_config, size=1.0, background=None, handler=None):
         self.colour = colour
         self.background = background
         self.font = Font("assets/swiss911.ttf", int(19.0 * size))
@@ -95,7 +99,7 @@ class LcarsText(ElementBase):
         if (pos[1] < 0):
             pos = (pos[0], 400 - self.image.get_rect().width / 2)
             
-        ElementBase.__init__(self, colour, pos, None, handler)
+        ElementBase.__init__(self, colour, pos, None, ui_config, handler)
 
     def renderText(self, message):        
         if (self.background == None):
@@ -109,22 +113,20 @@ class LcarsText(ElementBase):
 class LcarsBlockLarge(LcarsButton):
     """Left navigation block - large version"""
 
-    def __init__(self, colour, pos, text, handler=None):
+    def __init__(self, colour, pos, text, ui_config, handler=None):
         size = (98, 147)
-        LcarsButton.__init__(self, colour, pos, text, handler, size)
+        LcarsButton.__init__(self, colour, pos, text, ui_config, handler, size)
 
 class LcarsBlockMedium(LcarsButton):
    """Left navigation block - medium version"""
 
-   def __init__(self, colour, pos, text, handler=None):
+   def __init__(self, colour, pos, text, ui_config, handler=None):
         size = (98, 62)
-        LcarsButton.__init__(self, colour, pos, text, handler, size)
+        LcarsButton.__init__(self, colour, pos, text, ui_config, handler, size)
 
 class LcarsBlockSmall(LcarsButton):
    """Left navigation block - small version"""
 
-   def __init__(self, colour, pos, text, handler=None):
+   def __init__(self, colour, pos, text, ui_config, handler=None):
         size = (98, 34)
-        LcarsButton.__init__(self, colour, pos, text, handler, size)
-
-    
+        LcarsButton.__init__(self, colour, pos, text, ui_config, handler, size)

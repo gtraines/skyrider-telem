@@ -5,8 +5,8 @@ class LcarsScreen:
     """
     Manage a UI screen
     """
-    def __init__(self):
-        self.nextScreen = None
+    def __init__(self, next_screen=None):
+        self.nextScreen = next_screen
         self.lastFrameTicks = 0
     
     def setup(self):

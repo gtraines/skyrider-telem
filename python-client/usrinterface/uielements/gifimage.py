@@ -1,13 +1,13 @@
-from ui.utils.gif_image import GIFImage
-from ui.widgets.sprite import LcarsWidget
+from ..utils.gif_image import GIFImage
+from .elementbase import ElementBase
 
-class LcarsGifImage(LcarsWidget):
+class LcarsGifImage(ElementBase):
     
-    def __init__(self, imagefilename, pos, duration=-1):
+    def __init__(self, imagefilename, pos, ui_config, duration=-1):
         self.image = GIFImage(imagefilename, duration)
         self.pos = pos
         size = (self.image.get_rect().width, self.image.get_rect().height)
-        LcarsWidget.__init__(self, None, pos, size)
+        ElementBase.__init__(self, None, pos, size, ui_config)
         
     def update(self, screen):
         if self.visible:

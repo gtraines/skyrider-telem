@@ -5,26 +5,27 @@ from .utils import sound
 
 
 class UserInterface:
-    def __init__(self, screen, ui_settings,
+    def __init__(self, screen, ui_config,
                  audio_params=(22050, -8, 1, 1024)):
         # init system
         pygame.display.init()
         pygame.font.init()
         sound.init(audio_params)
 
-        self.screenSurface = pygame.display.set_mode(ui_settings.dimensions) #, pygame.FULLSCREEN)
+        self.screenSurface = pygame.display.set_mode(ui_config.ui_dimensions) #, pygame.FULLSCREEN)
         self.fpsClock = pygame.time.Clock()
-        self.fps = ui_settings.refresh_rate_hz
+        self.fps = ui_config.refresh_rate_hz
         
         pygame.display.set_caption("LCARS")
-        if not ui_settings.debug_mode_on: 
+        if not ui_config.debug_mode_on: 
             # see https://github.com/tobykurien/rpi_lcars/issues/9
             #pygame.mouse.set_visible(False)
             pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
         
         # set up screen elements
         self.all_sprites = pygame.sprite.LayeredDirty()
-        self.all_sprites.UI_PLACEMENT_MODE = ui_settings.placement_mode_on
+        repr(self.all_sprites)
+        self.all_sprites.UI_PLACEMENT_MODE = ui_config.placement_mode_on
     
         self.screen = screen
         self.screen.setup(self.all_sprites)
@@ -39,7 +40,7 @@ class UserInterface:
     def handle_events(self):
         for event in pygame.event.get():
             if (event.type == pygame.QUIT) or \
-                (event.type == KEYUP and event.key == K_ESCAPE):
+                (event.type == pygame.KEYUP and event.key == pygame.K_ESCAPE):
                 pygame.quit()
                 self.running = False
                 return
@@ -64,5 +65,5 @@ class UserInterface:
     
     def tick(self):
         self.update()
-        self.handleEvents()
+        self.handle_events()
         self.fpsClock.tick(self.fps)

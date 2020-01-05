@@ -10,9 +10,9 @@ class LcarsBackground(ElementBase):
         pass
     
 class LcarsBackgroundImage(ElementBase):
-    def __init__(self, image):
+    def __init__(self, image, ui_config):
         self.image = pygame.image.load(image).convert()
-        ElementBase.__init__(self, None, (0,0), None)
+        ElementBase.__init__(self, None, (0,0), None, ui_config)
     
     def update(self, screen):
         screen.blit(self.image, self.rect)
@@ -22,6 +22,6 @@ class LcarsBackgroundImage(ElementBase):
         pass
     
 class LcarsImage(ElementBase):
-    def __init__(self, image, pos):
+    def __init__(self, image, pos, ui_config):
         self.image = pygame.image.load(image).convert()
-        ElementBase.__init__(self, None, pos, None)
+        ElementBase.__init__(self, None, pos, None, ui_config)

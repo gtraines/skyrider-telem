@@ -4,8 +4,9 @@ from ..utils.interpolator import Interpolator
 class ElementBase(pygame.sprite.DirtySprite):
     """Base class for all widgets"""
 
-    def __init__(self, color, pos, size, handler=None):
+    def __init__(self, color, pos, size, ui_config, handler=None):
         pygame.sprite.DirtySprite.__init__(self)
+        self._ui_config = ui_config
         if self.image == None:
             self.image = pygame.Surface(size).convert()
             self.image.fill(color)
@@ -79,9 +80,10 @@ class ElementBase(pygame.sprite.DirtySprite):
 
 class LcarsMoveToMouse(ElementBase):
     """For testing purposes - move a small square to last clicked position"""
-    def __init__(self, color):
+    def __init__(self, color, ui_config):
         self.image = None
-        ElementBase.__init__(self, color, (0,0), (10,10))
+        
+        ElementBase.__init__(self, color, (0,0), (10,10), ui_config)
         self.focussed = True
 
     def handleEvent(self, event, clock):
