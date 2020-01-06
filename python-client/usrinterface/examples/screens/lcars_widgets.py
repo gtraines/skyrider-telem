@@ -2,9 +2,9 @@ import pygame
 from pygame.font import Font
 from pygame.locals import *
 
-from ...utils.sound import Sound
+from ...utils.sound import SoundEffect
 from ...uielements.elementbase import ElementBase
-from ...uiconstants import ColorsRgb
+from ... import ColorsRgb
 
 class LcarsElbow(ElementBase):
     """The LCARS corner elbow - not currently used"""
@@ -70,7 +70,7 @@ class LcarsButton(ElementBase):
         self.applyColour(colour)
         self.highlighted = False
         
-        self.beep = Sound("assets/audio/panel/202.wav", self._ui_config)
+        self.beep = SoundEffect("assets/audio/panel/202.wav", self._ui_config)
 
     def handleEvent(self, event, clock):
         if (event.type == pygame.MOUSEBUTTONDOWN and 

@@ -1,7 +1,7 @@
 import pygame
 from pygame import locals as pyg_const
 from pygame import event
-from updatable.updatableabc import UpdatableAbc
+from core.updatableabc import UpdatableAbc
 
 class InputController(UpdatableAbc):
     
