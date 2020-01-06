@@ -2,7 +2,7 @@ import sys
 import pygame
 
 from ... import ColorsRgb
-from ...utils.sound import Sound
+from ...utils.sound import SoundEffect
 from ...uielements.background import LcarsBackgroundImage
 from ...uielements.gifimage import LcarsGifImage
 from ...uielements.screen import LcarsScreen
@@ -16,7 +16,8 @@ class ScreenAuthorize(LcarsScreen):
         LcarsScreen.__init__(self)
             
     def setup(self, all_sprites):
-        all_sprites.add(LcarsBackgroundImage("assets/lcars_screen_2.png", self._ui_config),
+        all_sprites.add(LcarsBackgroundImage("assets/lcars_screen_2.png", 
+                                             self._ui_config),
                         layer=0)
 
         all_sprites.add(LcarsGifImage("assets/gadgets/stlogorotating.gif", (103, 369), self._ui_config, 50), 
@@ -57,12 +58,12 @@ class ScreenAuthorize(LcarsScreen):
         self.layer2 = all_sprites.get_sprites_from_layer(2)
 
         # sounds
-        Sound("assets/audio/panel/215.wav", self._ui_config).play()
-        self.sound_granted = Sound("assets/audio/accessing.wav", self._ui_config)
-        self.sound_beep1 = Sound("assets/audio/panel/201.wav", self._ui_config)
-        self.sound_denied = Sound("assets/audio/access_denied.wav", self._ui_config)
-        self.sound_deny1 = Sound("assets/audio/deny_1.wav", self._ui_config)
-        self.sound_deny2 = Sound("assets/audio/deny_2.wav", self._ui_config)
+        SoundEffect("assets/audio/panel/215.wav", self._ui_config).play()
+        self.sound_granted = SoundEffect("assets/audio/accessing.wav", self._ui_config)
+        self.sound_beep1 = SoundEffect("assets/audio/panel/201.wav", self._ui_config)
+        self.sound_denied = SoundEffect("assets/audio/access_denied.wav", self._ui_config)
+        self.sound_deny1 = SoundEffect("assets/audio/deny_1.wav", self._ui_config)
+        self.sound_deny2 = SoundEffect("assets/audio/deny_2.wav", self._ui_config)
 
         ############
         # SET PIN CODE WITH THIS VARIABLE
@@ -88,7 +89,7 @@ class ScreenAuthorize(LcarsScreen):
             if (not self.layer2[0].visible):
                 for sprite in self.layer1: sprite.visible = False
                 for sprite in self.layer2: sprite.visible = True
-                Sound("assets/audio/enter_authorization_code.wav", self._ui_config).play()
+                SoundEffect("assets/audio/enter_authorization_code.wav", self._ui_config).play()
             elif (self.pin_i == len(str(self.pin))):
                 # Ran out of button presses
                 if (self.correct == 4):

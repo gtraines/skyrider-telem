@@ -5,14 +5,13 @@ from .utils import sound
 
 
 class UserInterface:
-    def __init__(self, screen, ui_config,
-                 audio_params=(22050, -8, 1, 1024)):
+    def __init__(self, screen, ui_config):
         # init system
         pygame.display.init()
         pygame.font.init()
-        sound.init(audio_params)
+        sound.init(ui_config.audio_params)
 
-        self.screenSurface = pygame.display.set_mode(ui_config.ui_dimensions) #, pygame.FULLSCREEN)
+        self.screenSurface = pygame.display.set_mode(ui_config.ui_dimensions, HWSURFACE | DOUBLEBUF | RESIZABLE) #, pygame.FULLSCREEN)
         self.fpsClock = pygame.time.Clock()
         self.fps = ui_config.refresh_rate_hz
         

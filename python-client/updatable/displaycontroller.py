@@ -1,5 +1,5 @@
 import pygame
-from updatable.updatableabc import UpdatableAbc
+from core.updatableabc import UpdatableAbc
 
 class ColorConsts:
     # Define some colors

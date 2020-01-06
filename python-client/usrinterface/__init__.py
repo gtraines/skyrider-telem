@@ -1,2 +1,3 @@
 from .ui import UserInterface
-from .uiconstants import ColorsRgb, DEFAULT_UI_CONFIG
+from .uicolors import ColorsRgb, HudColorsRgb
+from .uiconstants import DEFAULT_UI_CONFIG

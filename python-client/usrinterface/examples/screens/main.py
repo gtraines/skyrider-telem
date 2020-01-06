@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from .lcars_widgets import *
-from ...uiconstants import ColorsRgb
+from ... import ColorsRgb
 from ...uielements.background import LcarsBackgroundImage, LcarsImage
 from ...uielements.gifimage import LcarsGifImage
 from ...uielements.screen import LcarsScreen
@@ -15,56 +15,82 @@ class ScreenMain(LcarsScreen):
         LcarsScreen.__init__(self)
         
     def setup(self, all_sprites):
-        all_sprites.add(LcarsBackgroundImage("assets/lcars_screen_1b.png", self._ui_config),
+        all_sprites.add(LcarsBackgroundImage("assets/lcars_screen_1b.png", 
+                                             self._ui_config),
                         layer=0)
 
         # panel text
-        all_sprites.add(LcarsText(ColorsRgb.BLACK, (15, 44), "LCARS 105", self._ui_config),
+        all_sprites.add(LcarsText(ColorsRgb.BLACK, (15, 44), 
+                                  "LCARS 105", 
+                                  self._ui_config),
                         layer=1)
                         
-        all_sprites.add(LcarsText(ColorsRgb.ORANGE, (0, 135), "HOME AUTOMATION", 
+        all_sprites.add(LcarsText(ColorsRgb.ORANGE, 
+                                  (0, 135),
+                                  "HOME AUTOMATION", 
                                   self._ui_config, 2),
                         layer=1)
-        all_sprites.add(LcarsBlockMedium(ColorsRgb.RED_BROWN, (145, 16), "LIGHTS", 
+        all_sprites.add(LcarsBlockMedium(ColorsRgb.RED_BROWN, 
+                                         (145, 16), 
+                                         "LIGHTS", 
                                          self._ui_config),
                         layer=1)
-        all_sprites.add(LcarsBlockSmall(ColorsRgb.ORANGE, (211, 16), "CAMERAS", 
+        all_sprites.add(LcarsBlockSmall(ColorsRgb.ORANGE, 
+                                        (211, 16),
+                                        "CAMERAS", 
                                         self._ui_config),
                         layer=1)
-        all_sprites.add(LcarsBlockLarge(ColorsRgb.BEIGE, (249, 16), "ENERGY", 
+        all_sprites.add(LcarsBlockLarge(ColorsRgb.BEIGE, 
+                                        (249, 16),
+                                        "ENERGY", 
                                         self._ui_config),
                         layer=1)
 
-        self.ip_address = LcarsText(ColorsRgb.BLACK, (444, 520),
-                                    get_ip_address_string(), self._ui_config)
+        self.ip_address = LcarsText(ColorsRgb.BLACK, 
+                                    (444, 520),
+                                    get_ip_address_string(), 
+                                    self._ui_config)
+        
         all_sprites.add(self.ip_address, layer=1)
 
         # info text
-        all_sprites.add(LcarsText(ColorsRgb.WHITE, (192, 174), "EVENT LOG:", 
+        all_sprites.add(LcarsText(ColorsRgb.WHITE, (192, 174), 
+                                  "EVENT LOG:", 
                                   self._ui_config, 1.5),
                         layer=3)
-        all_sprites.add(LcarsText(ColorsRgb.BLUE, (244, 174), "2 ALARM ZONES TRIGGERED", 
+        all_sprites.add(LcarsText(ColorsRgb.BLUE, (244, 174), 
+                                  "2 ALARM ZONES TRIGGERED", 
                                   self._ui_config, 1.5),
                         layer=3)
-        all_sprites.add(LcarsText(ColorsRgb.BLUE, (286, 174), "14.3 kWh USED YESTERDAY", 
+        all_sprites.add(LcarsText(ColorsRgb.BLUE, (286, 174), 
+                                  "14.3 kWh USED YESTERDAY", 
                                   self._ui_config, 1.5),
                         layer=3)
-        all_sprites.add(LcarsText(ColorsRgb.BLUE, (330, 174), "1.3 Tb DATA USED THIS MONTH", 
+        all_sprites.add(LcarsText(ColorsRgb.BLUE, (330, 174), 
+                                  "1.3 Tb DATA USED THIS MONTH", 
                                   self._ui_config, 1.5),
                         layer=3)
         self.info_text = all_sprites.get_sprites_from_layer(3)
 
         # date display
-        self.stardate = LcarsText(ColorsRgb.BLUE, (12, 380), "STAR DATE 2311.05 17:54:32", 1.5)
+        self.stardate = LcarsText(ColorsRgb.BLUE, 
+                                  (12, 380), 
+                                  "STAR DATE 2311.05 17:54:32", 
+                                  1.5)
+        
         self.lastClockUpdate = 0
         all_sprites.add(self.stardate, layer=1)
 
         # buttons
-        all_sprites.add(LcarsButton(ColorsRgb.RED_BROWN, (6, 662), "LOGOUT",
+        all_sprites.add(LcarsButton(ColorsRgb.RED_BROWN, 
+                                    (6, 662), 
+                                    "LOGOUT",
                                     self._ui_config, 
                                     self.logoutHandler),
                         layer=4)
-        all_sprites.add(LcarsButton(ColorsRgb.BEIGE, (107, 127), "SENSORS", 
+        all_sprites.add(LcarsButton(ColorsRgb.BEIGE, 
+                                    (107, 127), 
+                                    "SENSORS", 
                                     self._ui_config, 
                                     self.sensorsHandler),
                         layer=4)
@@ -97,8 +123,8 @@ class ScreenMain(LcarsScreen):
         all_sprites.add(self.weather, layer=2)
 
         #all_sprites.add(LcarsMoveToMouse(colours.WHITE), layer=1)
-        self.beep1 = Sound("assets/audio/panel/201.wav", self._ui_config)
-        Sound("assets/audio/panel/220.wav", self._ui_config).play()
+        self.beep1 = SoundEffect("assets/audio/panel/201.wav", self._ui_config)
+        SoundEffect("assets/audio/panel/220.wav", self._ui_config).play()
 
     def update(self, screenSurface, fpsClock):
         if pygame.time.get_ticks() - self.lastClockUpdate > 1000:

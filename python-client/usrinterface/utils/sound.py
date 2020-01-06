@@ -1,9 +1,9 @@
 """Helper classes and functions needed to globally enable/disable sound"""
 import pygame
-from pygame.mixer import Sound as OldSound
+from pygame.mixer import Sound
 
 # Cannot use inheritance or decorator because pygame.mixer.Sound is a C-extension.
-class Sound:
+class SoundEffect:
     """Class wrapping ``pygame.mixer.Sound`` with the ability to enable/disable sound globally
 
     Use this instead of ``pygame.mixer.Sound``. The interface is fully transparent.
@@ -11,7 +11,7 @@ class Sound:
     def __init__(self, source, ui_config):
         self._ui_config = ui_config
         if ui_config.sound_on:
-            self.sound = OldSound(source)
+            self.sound = Sound(source)
 
     def play(self, loops=0, maxtime=0, fade_ms=0):
         if self._ui_config:
@@ -49,4 +49,7 @@ class Sound:
 def init(audio_params, sound_on=True):
     """Use this instead of ``pygame.mixer.init``"""
     if sound_on:
-        pygame.mixer.init(audio_params[0], audio_params[1], audio_params[2], audio_params[3])
+        pygame.mixer.init(audio_params.frequency, 
+                          audio_params.size, 
+                          audio_params.channels, 
+                          audio_params.buffer_size)
