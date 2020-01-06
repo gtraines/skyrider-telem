@@ -37,8 +37,10 @@ class RelativeElementAbc(UpdatableAbc):
         return self.relative_element_description.relative_layer
     
     def get_absolute_top_left_coords(self, parent_top_left_coord, parent_dimensions):
-        x_coord = parent_top_left_coord.x + (self.relative_offset_coords.x_percent_offset * parent_dimensions.width)
-        y_coord = parent_top_left_coord.y + (self.relative_offset_coords.y_percent_offset * parent_dimensions.height)
+        x_coord = parent_top_left_coord.x + (
+            self.relative_offset_coords.x_percent_offset * parent_dimensions.width)
+        y_coord = parent_top_left_coord.y + (
+            self.relative_offset_coords.y_percent_offset * parent_dimensions.height)
         
         return Coord2D(x=x_coord, y=y_coord)
     
