@@ -10,7 +10,7 @@ Coord2D = namedtuple('Coord2D', ['x', 'y'])
 Dimensions2D = namedtuple('Dimensions2D', ['height', 'width'])
 
 RelativeElementDescription = namedtuple('RelativeElementDescription', [
-    'top_left_offset',
+    'topleft_offset',
     'relative_dimensions',
     'relative_layer'
 ])
@@ -26,7 +26,7 @@ class RelativeElementAbc(UpdatableAbc):
     
     @property
     def relative_offset_coords(self):
-        return self.relative_element_description.top_left_offset
+        return self.relative_element_description.topleft_offset
     
     @property
     def relative_dimensions(self):
@@ -36,10 +36,10 @@ class RelativeElementAbc(UpdatableAbc):
     def relative_layer(self):
         return self.relative_element_description.relative_layer
     
-    def get_absolute_top_left_coords(self, parent_top_left_coord, parent_dimensions):
-        x_coord = parent_top_left_coord.x + (
+    def get_absolute_topleft_coords(self, parent_topleft_coord, parent_dimensions):
+        x_coord = parent_topleft_coord.x + (
             self.relative_offset_coords.x_percent_offset * parent_dimensions.width)
-        y_coord = parent_top_left_coord.y + (
+        y_coord = parent_topleft_coord.y + (
             self.relative_offset_coords.y_percent_offset * parent_dimensions.height)
         
         return Coord2D(x=x_coord, y=y_coord)
@@ -54,17 +54,19 @@ class RelativeElementAbc(UpdatableAbc):
         absolute_layer = self.relative_layer + parent_layer
         return absolute_layer
 
-    def draw_absolute(self, parent_top_left_coord, parent_dimensions, parent_layer):
-        top_left_corner_coords = self.get_absolute_top_left_coords(parent_top_left_coord, parent_dimensions)
+    def draw_absolute(self, parent_topleft_coord, parent_dimensions, parent_layer):
+        topleft_coords = self.get_absolute_topleft_coords(
+            parent_topleft_coord, 
+            parent_dimensions)
         absolute_dimensions = self.get_absolute_dimensions(parent_dimensions)
         layer = self.get_absolute_layer(parent_layer)
         
         # DO THE DRAW STUFF
-        self.draw_element(top_left_corner_coords, absolute_dimensions, layer)
+        self.draw_element(topleft_coords, absolute_dimensions, layer)
         return True
         
     @abstractmethod
-    def draw_element(self, top_left_corner_coords, absolute_dimensions, layer):
+    def draw_element(self, topleft_coords, absolute_dimensions, layer):
         pass
 
 class ElementContainerAbc(UpdatableAbc):
@@ -111,14 +113,60 @@ class ElementContainerAbc(UpdatableAbc):
         pass
     
     def draw(self, context):
-        top_left_relative_coord = self.get_position_relative_to_parent(context)
-        
-        
-    
+        topleft_relative_coord = self.get_position_relative_to_parent(context)
 
     @staticmethod
     def validate_element(element):
         if not isinstance(element, UpdatableAbc):
             raise Exception('Elements must implement UpdatableAbc')
         
+
+
+class RelativeRectangleElement(RelativeElementAbc):
+
+    def __init__(self, relative_description):
+        super().__init__(relative_description)
+
+    def draw_element(self, context, topleft_coords, absolute_dimensions, layer):
+        """
+        pygame.draw.rect()
+draw a rectangle
+rect(surface, color, rect) -> Rect
+rect(surface, color, rect, width=0) -> Rect
+Draws a rectangle on the given surface.
+
+Parameters:	
+surface (Surface) -- surface to draw on
+color (Color or int or tuple(int, int, int, [int])) -- color to draw with, the alpha value is optional if using a tuple (RGB[A])
+rect (Rect) -- rectangle to draw, position and dimensions
+width (int) --
+(optional) used for line thickness or to indicate that the rectangle is to be filled (not to be confused with the width value of the rect parameter)
+
+if width == 0, (default) fill the rectangle
+if width > 0, used for line thickness
+if width < 0, nothing will be drawn
+        """
+        
+        BLUE=(0,0,255)
+        """
+            Rect(left, top, width, height) -> Rect
+            Rect((left, top), (width, height)) -> Rect
+            Rect(object) -> Rect
+        """
+        pygame.draw.rect(context.display_surface, BLUE, 
+            (topleft_coords.x,
+            topleft_coords.y,
+            absolute_dimensions.width,
+            absolute_dimensions.height), 10)
+
+
+if __name__ == "__main__":
+    pygame.init()
+
+    DISPLAY=pygame.display.set_mode((500,400),0,32)
+    WHITE=(255,255,255)
+    
+
+    DISPLAY.fill(WHITE)
+
 
