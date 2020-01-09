@@ -160,6 +160,17 @@ if width < 0, nothing will be drawn
             absolute_dimensions.height), 10)
 
 
+class RectangleElementContainer(ElementContainerAbc):
+
+    def __init__(self, rectangle, rectangle_parent):
+        super().__init__.(rectangle, rectangle_parent, *children)
+
+class ScreenContainer(ElementContainerAbc):
+
+    def __init__(self, rectangle, rectangle_parent):
+        super().__init__.(rectangle, rectangle_parent, *children)
+        
+
 if __name__ == "__main__":
     pygame.init()
 
