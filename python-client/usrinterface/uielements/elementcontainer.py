@@ -18,6 +18,9 @@ RelativeElementDescription = namedtuple('RelativeElementDescription', [
 class RelativeElementAbc(UpdatableAbc):
     
     def __init__(self, relative_description):
+        """
+        relative_description: RelativeElementDescription
+        """
         self._relative_element_description = relative_description
         
     @property
