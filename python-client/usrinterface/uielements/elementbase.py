@@ -1,6 +1,7 @@
 import pygame
 from ..utils.interpolator import Interpolator
 
+
 class ElementBase(pygame.sprite.DirtySprite):
     """Base class for all widgets"""
 
@@ -26,7 +27,7 @@ class ElementBase(pygame.sprite.DirtySprite):
         if not self.visible:
             return
         
-        if self.line != None:
+        if self.line is not None:
             self.line.next()
             if self.rect.center == self.line.pos:
                 self.dirty = 0

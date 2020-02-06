@@ -2,12 +2,19 @@ from abc import ABCMeta, abstractmethod
 from collections import namedtuple
 from core import UpdatableAbc
 
-RelativeOffsetCoord = namedtuple('RelativeOffsetCoord', ['x_percent_offset', 'y_percent_offset'])
-RelativeDimensions = namedtuple('RelativeDimensions', ['height_percent', 'width_percent'])
+RelativeOffsetCoord = namedtuple('RelativeOffsetCoord', 
+                                ['x_percent_offset', 'y_percent_offset'])
+RelativeDimensions = namedtuple('RelativeDimensions', 
+                                ['height_percent', 'width_percent'])
 
-ScalingCoefficentVector2D = namedtuple('ScalingCoefficientVector2D', ['x_coefficient', 'y_coefficient'])
-Coord2D = namedtuple('Coord2D', ['x', 'y'])
-Dimensions2D = namedtuple('Dimensions2D', ['height', 'width'])
+ScalingCoefficentVector2D = namedtuple('ScalingCoefficientVector2D',
+                                        ['x_coefficient', 'y_coefficient'])
+Coord2D = namedtuple('Coord2D', 
+        ['x', 'y']
+    )
+Dimensions2D = namedtuple('Dimensions2D', 
+        ['height', 'width']
+    )
 
 RelativeElementDescription = namedtuple('RelativeElementDescription', [
     'topleft_offset',
